@@ -24,18 +24,26 @@
 		h2{
 			font-family: sans-serif ;
 		}
+		h5{
+			font-style:italic ;
+		}
 	</style>
 </head>
 <body>
 
 
 	<span>
-	<center><h2>Talking Local-E </h2></center>
-	<button id = "create_channel"> Create Channel </button>
+	<center><h2>Talking Local-E </h2>
+	<h5>"Communicate Instantly, Hassle-Free, Local-E"</h5>
+
+	</center>
+	<form action = "https://rawgit.com/nickperez1285/local-e/master/create.html">
+	<input id = "create_channel" type="submit" value="Create Channel">
+</form>
 	<!--  -->
 	
 	<div id = "max-drop"> 
-	Max Distance 
+	Max Proximity
 	<select>
 		<option>.1 mile</option>
 		<option>.5 mile </option>
@@ -58,15 +66,15 @@
 	<hr>
 	<table style = "width:100%">
 		<tr>
-			<th>Distance</th>
+			<th>Proximity</th>
 			<th>Channel Name </th>
 			<th>Time Remaining</th>
 		</tr>
 		<tr>
 			<td>.1 mile</td>
 			<!-- local link -->
-			<td> <a href="../satori/angelhack.html">Angel Hack Event Chat</a> 
-			</td>
+	<!-- 		<td> <a href="../satori/angelhack.html">Angel Hack Event Chat</a> 
+			</td> -->
 
 			<!-- online link -->
 			<td> <a href="https://rawgit.com/nickperez1285/local-e/master/angelhack.html">Angel Hack Event Chat</a> </td>
