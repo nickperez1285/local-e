@@ -16,77 +16,114 @@
 			color:blue ;
 /*			text-align:right;
 */		}
-		#create_channel {
-			float:right;
-			font-size: 15px;
-			border-radius: 25px
-		}
-		h2{
-			font-family: sans-serif ;
-		}
-		h5{
-			font-style:italic ;
-		}
-	</style>
+#create_channel {
+	float:right;
+	font-size: 15px;
+	border-radius: 25px
+}
+h2{
+	font-family: sans-serif ;
+}
+h5{
+	font-style:italic ;
+}
+/*for chat */
+p {
+	margin: 10px 0px 5px 0px;
+}
+div#output {
+	padding: 6px;
+	width: 95%;
+	height: 300px;
+	border: 1px solid #ccc;
+	border-radius: 25px;
+	font-size: medium;
+	font-family: sans-serif;
+	overflow-y: scroll;
+}
+div#output > div {
+	padding: 4px 0;
+}
+
+#chatbox{
+	width: 90%;
+	border-radius: 5px;
+
+}
+#filler{
+	line-height: 1.5;
+	display: block;
+	padding:6px ;
+}
+/*end for chat*/
+</style>
+<script src="https://satori-a.akamaihd.net/satori-rtm-sdk/v1.0.2/sdk.min.js"></script>
 </head>
 <body>
 
 
 	<span>
-	<center><h2>Talking Local-E </h2>
-	<h5>"Communicate Instantly, Hassle-Free, Local-E"</h5>
+		<center><h2>Talking Local-E </h2>
+			<h5>"Communicate Instantly, Hassle-Free, Local-E"</h5>
 
-	</center>
-	<form action = "https://rawgit.com/nickperez1285/local-e/master/create.html">
-	<input id = "create_channel" type="submit" value="Create Channel">
-</form>
-	<!--  -->
-	
-	<div id = "max-drop"> 
-	Max Proximity
-	<select>
-		<option>.1 mile</option>
-		<option>.5 mile </option>
-		<option>1 mile</option>
-		<option>2 miles</option>
-		<option>5 miles</option>
-		<option>10 miles</option>
-		<option>15 miles</option>
-		<option>20 miles</option>
-		<option>25 miles</option>
-		<option>50 miles</option>
-	</select>
-<button>Filter</button>
-	</div>
+		</center>
+		<form action = "https://rawgit.com/nickperez1285/local-e/master/create.html">
+			<input id = "create_channel" type="submit" value="Create Channel">
+		</form>
+		<!--  -->
 
+		<div id = "max-drop"> 
+			Max Proximity
+			<select>
+				<option>.1 mile</option>
+				<option>.5 mile </option>
+				<option>1 mile</option>
+				<option>2 miles</option>
+				<option>5 miles</option>
+				<option selected="selected">10 miles</option>
+				<option>15 miles</option>
+				<option>20 miles</option>
+				<option>25 miles</option>
+			</select>
+			<button>Filter</button>
+		</div>
 
 
-	<center><div id = "ip">Your Location: San Mateo, CA (IP : 50.202.37.130) </div></center>
+<!--  fixed ip for now... -->
+<hr>
+		<center><div id = "ip">Your Location: San Mateo, CA (IP : 50.202.37.130) </div></center>
 	</span>
 	<hr>
 	<table style = "width:100%">
 		<tr>
 			<th>Proximity</th>
-			<th>Channel Name </th>
+			<th>Local Channels </th>
 			<th>Time Remaining</th>
 		</tr>
 		<tr>
 			<td>.1 mile</td>
 			<!-- local link -->
-	<!-- 		<td> <a href="../satori/angelhack.html">Angel Hack Event Chat</a> 
+		<!-- 	<td> <a href="../satori/angelhack.html">Angel Hack Event Chat</a> 
 			</td> -->
 
 			<!-- online link -->
 			<td> <a href="https://rawgit.com/nickperez1285/local-e/master/angelhack.html">Angel Hack Event Chat</a> </td>
 			<td > 10 hrs  </td>
+
 		</tr>	
-	
+
 		<tr>
+			<td>.1 mile</td>
+			<td> <a href="">Work Channel</a></td>
+			<td >8 hrs </td>
+		</tr>
+
+			<tr>
 			<td>.5 mile</td>
 			<td> <a href="">Neighborhood Watch</a></td>
 			<td >1 week </td>
 		</tr>
-			<tr>
+		<tr>
 			<td>10 miles</td>
 			<td> <a href="">Giants Game</a></td>
 			<td > 4 hrs  </td>
@@ -98,7 +135,99 @@
 		</tr>
 		
 	</table>
+	<br>
+	<hr>
+	<hr>
+	<br>
+	<!-- chat code-->
+	<input type="text" placeholder=" Type Here..." id= "chatbox" >
+	<input type="submit" id="submit">
 
+	<div id="output" />
+
+	<script type="text/javascript">
+		var endpoint = "wss://k4jj30ay.api.satori.com";
+		var appkey = "D172cf85bF1F70Fdb61BA9FedD225f18";
+      // Role and role secret are optional: replace only if you need to authenticate.
+      var role = "YOUR_ROLE";
+      var roleSecret = "YOUR_SECRET    ";
+      var channelName = "Local Chat";
+
+      function showText(text) {
+      	var view = document.getElementById("output");
+      	var record = "<div>" + text + "</div>";
+      	view.innerHTML = record + view.innerHTML;
+      }
+
+      // Check if the role is set to authenticate or not
+      var shouldAuthenticate = "YOUR_ROLE" != role;
+      var authProvider;
+      if (shouldAuthenticate) {
+      	authProvider = RTM.roleSecretAuthProvider(role, roleSecret);
+      }
+
+      var client = new RTM(endpoint, appkey, { authProvider: authProvider });
+
+      // Hook up to client connectivity state transitions
+      client.on("enter-connected", function () {
+      	showText("Connected to Satori RTM!");
+      });
+      client.on("leave-connected", function () {
+      	showText("Disconnected from Satori RTM");
+      });
+      client.on("error", function (error) {
+      	var reason;
+      	if (error.body) {
+      		reason = error.body.error + " - " + error.body.reason;
+      	} else {
+      		reason = "unknown reason";
+      	}
+      	showText("RTM client failed: " + reason);
+      });
+
+      client.start();
+
+
+      var subscription = client.subscribe(channelName, RTM.SubscriptionMode.SIMPLE);
+      subscription.on("enter-subscribed", function() {
+        // When subscription is established (confirmed by Satori RTM).
+        showText("Welcome to channel: " + channelName);
+    });
+      subscription.on("rtm/subscribe/error", function(pdu) {
+        // When a subscribe error occurs.
+        showText("Failed to subscribe: " + pdu.body.error + " - " + pdu.body.reason);
+    });
+      subscription.on("rtm/subscription/data", function(pdu) {
+        // Messages arrive in an array.
+        pdu.body.messages.forEach(function(msg) {
+        	showText(Date() + " Guest1: " + JSON.stringify(msg));
+        });
+    });
+
+
+
+
+      var submit = document.getElementById("submit")
+      submit.onclick =  function() {
+        // At this point, the client may not yet be connected to Satori RTM.
+        // If client is not connected then skip publishing.
+        if (client.isConnected()) {
+
+        	var message =  document.getElementById("chatbox").value
+
+
+        	client.publish(channelName, message , function (pdu) {
+        		if (pdu.action === 'rtm/publish/ok') {
+        			console.log('Publish confirmed');
+        		} else {
+        			console.log('Failed to publish. RTM replied with the error ' +
+        				pdu.body.error + ': ' + pdu.body.reason);
+        		}
+        	});
+        }
+    }
+
+</script>
 
 </body>
 </html>
