@@ -42,9 +42,15 @@
   <!-- new code -->
   <input type="text" id= "chatbox" >
   <input type="submit" id="submit">
-  <!-- end new code -->
   <center><p>Chat Log </p><br>
      <form action = "https://app.sparkpost.com/lists/recipients">
+<!-- t4mb6uwgnq2xvf@validator.sparkpost.com 
+curl -v \
+-H "Content-Type: application/json" \
+-H "Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf" \
+-X GET "https://api.sparkpost.com/api/v1/metrics/deliverability/aggregate?campaigns=testjob&from=2014-01-23T14:00&metrics=count_targeted,count_sent,count_accepted&timezone=America%2FNew_York&to=2014-06-23T15:50"
+
+-->
   <input type="submit" value="Subscribe">
 </form>
 </center>
@@ -66,7 +72,7 @@
       // Role and role secret are optional: replace only if you need to authenticate.
       var role = "YOUR_ROLE";
       var roleSecret = "YOUR_SECRET    ";
-      var channelName = "Angel Hack Event Chat";
+      var channelName = "Angel Hack Event";
 
       function showText(text) {
         var view = document.getElementById("output");
