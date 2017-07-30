@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Talking Local-E</title>
+	<style type="text/css">
+		th{
+			text-align: left ;
+
+		}
+		td {
+			/*text-align:center ;*/
+			vertical-align:middle ;
+		}
+
+		#ip{
+			color:blue ;
+/*			text-align:right;
+*/		}
+		#create_channel {
+			float:right;
+			font-size: 15px;
+			border-radius: 25px
+		}
+	</style>
+</head>
+<body>
+
+
+	<span>
+	<center><h2>Talking Local-E </h2></center>
+	<button id = "create_channel"> Create Channel </button>
+	</span>
+	<span>
+	
+	<div id = "max-drop"> 
+	Max Distance 
+	<select>
+		<option>.1 mile</option>
+		<option>.5 mile </option>
+		<option>1 mile</option>
+		<option>2 miles</option>
+		<option>5 miles</option>
+		<option>10 miles</option>
+		<option>15 miles</option>
+		<option>20 miles</option>
+		<option>25 miles</option>
+		<option>50 miles</option>
+	</select>
+<button>Filter</button>
+	</div>
+
+
+
+	<div id = "ip">Your Location: San Mateo, CA (IP : 50.202.37.130) </div>
+	</span>
+	<hr>
+	<table style = "width:100%">
+		<tr>
+			<th>Dist. From Source</th>
+			<th>Channel Name </th>
+			<th>Time Remaining</th>
+		</tr>
+		<tr>
+			<td>.1 mile</td>
+			<td> <a href="/Users/Nicks_Home/Desktop/satori/satori-rtm-sdk-js/tutorials/angelhack.html">Angel Hack Event Chat</a> </td>
+			<td > 10 hrs  </td>
+		</tr>	
+	
+		<tr>
+			<td>.5 mile</td>
+			<td> <a href="">neighborhood watch</a></td>
+			<td >1 week </td>
+		</tr>
+			<tr>
+			<td>10 miles</td>
+			<td> <a href="">Giants Game</a></td>
+			<td > 4 hrs  </td>
+		</tr>
+		<tr>
+			<td>10 miles </td>
+			<td> <a href="">Tourist Talk</a> </td>
+			<td >1 week </td>
+		</tr>
+		
+	</table>
+
+
+</body>
+</html>
