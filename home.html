@@ -200,7 +200,7 @@ div#output > div {
       subscription.on("rtm/subscription/data", function(pdu) {
         // Messages arrive in an array.
         pdu.body.messages.forEach(function(msg) {
-        	showText(Date() + " Guest1: " + JSON.stringify(msg));
+        	showText(Date() + " Guest: " + JSON.stringify(msg));
         });
     });
 
